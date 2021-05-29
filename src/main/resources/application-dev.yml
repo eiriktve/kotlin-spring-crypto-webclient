@@ -1,0 +1,17 @@
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      # disables remote access to console
+      settings.web-allow-others: false
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: admin
+    password: admin
+  sql:
+    init:
+      enabled: true

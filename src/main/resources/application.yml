@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: "rest-dao-template"
+  profiles:
+    active: dev
+
+webClient:
+  coinGecko:
+    url: https://api.coingecko.com/api/v3
+    allCoinsResource: /coins/list
+
