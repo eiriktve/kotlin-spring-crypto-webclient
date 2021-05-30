@@ -26,22 +26,22 @@ class WebClientConfiguration(private val webClientProps: WebClientProps) {
      * Customized HttpClient to be used in our WebClient configuration
      */
     @Bean
-    protected fun httpClient(): HttpClient {
-        return HttpClient.create()
+    protected fun httpClient(): HttpClient =
+        HttpClient.create()
             .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000)
             .responseTimeout(Duration.ofMillis(5000))
             .doOnConnected { conn: Connection ->
                 conn.addHandlerLast(ReadTimeoutHandler(5000, TimeUnit.MILLISECONDS))
                     .addHandlerLast(WriteTimeoutHandler(5000, TimeUnit.MILLISECONDS))
             }
-    }
+
 
     /**
      * Upping the memory size because we are calling endpoints which return a lot of data
      */
     @Bean
-    fun webclient(): WebClient {
-        return WebClient.builder()
+    fun webclient(): WebClient =
+        WebClient.builder()
             .baseUrl(webClientProps.url)
             .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
             .defaultHeader(HttpHeaders.ACCEPT, MediaType.APPLICATION_JSON_VALUE)
@@ -49,9 +49,8 @@ class WebClientConfiguration(private val webClientProps: WebClientProps) {
             .exchangeStrategies(
                 ExchangeStrategies
                     .builder()
-                    .codecs({ it.defaultCodecs().maxInMemorySize(16 * 1024 * 1024)} )
+                    .codecs({ it.defaultCodecs().maxInMemorySize(16 * 1024 * 1024) })
                     .build())
             .build()
-    }
-
 }
+

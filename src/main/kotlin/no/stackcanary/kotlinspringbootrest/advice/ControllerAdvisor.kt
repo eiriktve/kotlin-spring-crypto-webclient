@@ -22,7 +22,7 @@ class ControllerAdvisor : ResponseEntityExceptionHandler() {
      */
     @ExceptionHandler(Throwable::class)
     fun fallBackHandler(e: Throwable): ResponseEntity<Any> {
-        log.error("Entered fallback handler with error message ${e.localizedMessage}")
+        log.error("Entered fallback handler with error message ${e.localizedMessage}", e)
         val error = ErrorDto(
             HttpStatus.INTERNAL_SERVER_ERROR, e.localizedMessage,
             "An unexpected error occurred",
@@ -33,7 +33,7 @@ class ControllerAdvisor : ResponseEntityExceptionHandler() {
 
     @ExceptionHandler(CoinGeckoRestException::class)
     fun geckoExceptionHandler(e: CoinGeckoRestException): ResponseEntity<Any> {
-        log.error("Advice caught GeckoException with error message ${e.localizedMessage}")
+        log.error("Advice caught GeckoException with error message ${e.localizedMessage}", e)
         val error = ErrorDto(
             HttpStatus.valueOf(e.httpCode),
             e.message ?: "no message",

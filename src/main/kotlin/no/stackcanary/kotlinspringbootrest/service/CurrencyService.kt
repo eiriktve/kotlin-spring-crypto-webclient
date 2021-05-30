@@ -9,15 +9,13 @@ import reactor.core.publisher.Mono
 
 @Service
 class CurrencyService(
-    private val repository: CurrencyRepository,
-    private val coinGeckoClient: CoinGeckoClient
+    private val repository: CurrencyRepository
 ) {
 
-    fun getCoinsFromGecko(): List<CurrencyResponse> = coinGeckoClient.getCurrencies()
+    fun getAllCurrencies(): List<Currency> = repository.getAllCoins()
 
-    fun getCoins(): List<Currency> = repository.getAllCoins()
-
-    fun getCoinById(id: Long): Currency? = repository.findById(id).get()
+    fun getCurrencyByAbbreviatedName(abbrevName: String): Currency? =
+        repository.getCurrencyByAbbreviatedName(abbrevName)
 
     fun saveCoin(currency: Currency) = repository.save(currency)
 }

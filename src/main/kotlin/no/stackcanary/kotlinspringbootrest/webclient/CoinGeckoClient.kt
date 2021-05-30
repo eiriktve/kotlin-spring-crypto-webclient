@@ -25,7 +25,7 @@ class CoinGeckoClient(private val client: WebClient, private val webClientProps:
             .onStatus(HttpStatus::is5xxServerError) { it.createException() }
             .bodyToMono(String::class.java).block()
 
-        val mapper: ObjectMapper = ObjectMapper()
+        val mapper = ObjectMapper()
         return mapper.readValue(jsonResponse, object : TypeReference<List<CurrencyResponse>>() {})
     }
 }

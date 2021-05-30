@@ -1,6 +1,7 @@
 package no.stackcanary.kotlinspringbootrest.repository.model
 
 import org.springframework.data.annotation.Id
+import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDate
 
@@ -8,6 +9,8 @@ import java.time.LocalDate
 data class Currency(
     @Id val id: Long,
     val name: String,
+    @Column("ABBREV_NAME")
     val abbreviatedName: String,
-    val createdDate: LocalDate
+    @Column("CREATED")
+    val createdDate: LocalDate?
 )

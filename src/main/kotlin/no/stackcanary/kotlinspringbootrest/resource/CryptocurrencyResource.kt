@@ -14,18 +14,18 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class CryptocurrencyResource(private val currencyService: CurrencyService) {
 
-    // TODO: do
-    @GetMapping("/currency/{id}")
-    fun getCurrencyById(@PathVariable id: Long): ResponseEntity<Currency> {
-        val currency: Currency = currencyService.getCoinById(id)
+
+    @GetMapping("/currency/{abbrevName}")
+    fun getCurrencyByAbbreviatedName(@PathVariable abbrevName: String): ResponseEntity<Currency> {
+        val currency: Currency = currencyService.getCurrencyByAbbreviatedName(abbrevName)
             ?: return ResponseEntity.notFound().build()
         return ResponseEntity.ok(currency)
     }
 
     @GetMapping("/currency")
-    suspend fun getAllCoins(): ResponseEntity<List<CurrencyResponse>> {
-        val coinsFromGecko = currencyService.getCoinsFromGecko()
+    suspend fun getAllCurrencies(): ResponseEntity<List<Currency>> {
+        val currencies = currencyService.getAllCurrencies()
             ?: return ResponseEntity.notFound().build()
-        return ResponseEntity.ok(coinsFromGecko);
+        return ResponseEntity.ok(currencies);
     }
 }

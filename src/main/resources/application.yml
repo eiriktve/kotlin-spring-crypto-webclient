@@ -4,6 +4,15 @@ spring:
   profiles:
     active: dev
 
+# Logging must be set to DEBUG for request logging to work
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          filter:
+            CommonsRequestLoggingFilter: DEBUG
+
 webClient:
   coinGecko:
     url: https://api.coingecko.com/api/v3
