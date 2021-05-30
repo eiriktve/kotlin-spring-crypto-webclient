@@ -1,6 +1,7 @@
 package no.stackcanary.kotlinspringbootrest.webclient.response
 
 import com.fasterxml.jackson.annotation.JsonProperty
+import java.time.LocalDateTime
 
 // This file contains value classes / DTOs for different responses from CoinGecko
 
@@ -14,4 +15,9 @@ data class CurrencyResponse(
 ) {
     constructor() : this("", "", "")
 }
+
+data class EmptyResultResponse(
+    val message: String,
+    val timeStamp: LocalDateTime = LocalDateTime.now()
+)
 

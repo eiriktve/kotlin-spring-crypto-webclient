@@ -2,6 +2,8 @@ package no.stackcanary.kotlinspringbootrest.resource
 
 import no.stackcanary.kotlinspringbootrest.resource.dto.GenericDto
 import no.stackcanary.kotlinspringbootrest.service.PopulateDbService
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
@@ -21,8 +23,11 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class PopulateDbResource(private val service: PopulateDbService) {
 
+    val log: Logger = LoggerFactory.getLogger(PopulateDbResource::class.java)
+
     @PostMapping("/populate")
     fun populate(): ResponseEntity<GenericDto> {
+        log.info("Populating database with data from CoinGecko")
         service.populateDbWithDataFromCoinGecko()
         return ResponseEntity.ok(GenericDto(HttpStatus.OK.value(), "Database has been populated"))
     }

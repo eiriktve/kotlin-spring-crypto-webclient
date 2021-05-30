@@ -3,6 +3,9 @@ package no.stackcanary.kotlinspringbootrest.resource
 import no.stackcanary.kotlinspringbootrest.repository.model.Currency
 import no.stackcanary.kotlinspringbootrest.service.CurrencyService
 import no.stackcanary.kotlinspringbootrest.webclient.response.CurrencyResponse
+import no.stackcanary.kotlinspringbootrest.webclient.response.EmptyResultResponse
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
@@ -14,18 +17,21 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class CryptocurrencyResource(private val currencyService: CurrencyService) {
 
+    val log: Logger = LoggerFactory.getLogger(CryptocurrencyResource::class.java)
 
     @GetMapping("/currency/{abbrevName}")
-    fun getCurrencyByAbbreviatedName(@PathVariable abbrevName: String): ResponseEntity<Currency> {
+    fun getCurrencyByAbbreviatedName(@PathVariable abbrevName: String): ResponseEntity<Any> {
+        log.info("Retrieving currency from database with $abbrevName")
         val currency: Currency = currencyService.getCurrencyByAbbreviatedName(abbrevName)
-            ?: return ResponseEntity.notFound().build()
+            ?: return ResponseEntity.badRequest()
+                .body(EmptyResultResponse("$abbrevName does not exist"))
         return ResponseEntity.ok(currency)
     }
 
     @GetMapping("/currency")
     suspend fun getAllCurrencies(): ResponseEntity<List<Currency>> {
+        log.info("Retrieving all currencies from database")
         val currencies = currencyService.getAllCurrencies()
-            ?: return ResponseEntity.notFound().build()
-        return ResponseEntity.ok(currencies);
+        return ResponseEntity.ok(currencies)
     }
 }
