@@ -9,12 +9,10 @@ import java.time.LocalDateTime
  * Data class with an empty constructor
  */
 data class CurrencyResponse(
-    var id: String,
-    var symbol: String,
-    var name: String
-) {
-    constructor() : this("", "", "")
-}
+    var id: String = "",
+    var symbol: String = "",
+    var name: String = ""
+)
 
 data class EmptyResultResponse(
     val message: String,

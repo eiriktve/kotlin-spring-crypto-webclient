@@ -8,9 +8,7 @@ import org.springframework.stereotype.Service
 import reactor.core.publisher.Mono
 
 @Service
-class CurrencyService(
-    private val repository: CurrencyRepository
-) {
+class CurrencyService(private val repository: CurrencyRepository) {
 
     fun getAllCurrencies(): List<Currency> = repository.getAllCoins()
 
@@ -19,3 +17,5 @@ class CurrencyService(
 
     fun saveCoin(currency: Currency) = repository.save(currency)
 }
+
+
