@@ -11,5 +11,5 @@ interface CurrencyRepository: CrudRepository<Currency, Long> {
     fun getAllCoins(): List<Currency>
 
     @Query("select * from currency where abbrev_name = :abbrevName")
-    fun getCurrencyByAbbreviatedName(@Param("abbrevName") abbrevName: String): Currency?
+    fun getCurrencyByAbbreviatedName(@Param("abbrevName") abbrevName: String): List<Currency>
 }

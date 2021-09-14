@@ -12,7 +12,7 @@ class CurrencyService(private val repository: CurrencyRepository) {
 
     fun getAllCurrencies(): List<Currency> = repository.getAllCoins()
 
-    fun getCurrencyByAbbreviatedName(abbrevName: String): Currency? =
+    fun getCurrencyByAbbreviatedName(abbrevName: String): List<Currency> =
         repository.getCurrencyByAbbreviatedName(abbrevName)
 
     fun saveCoin(currency: Currency) = repository.save(currency)

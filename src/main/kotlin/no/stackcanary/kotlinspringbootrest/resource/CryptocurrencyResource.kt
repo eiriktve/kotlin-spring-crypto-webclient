@@ -2,7 +2,6 @@ package no.stackcanary.kotlinspringbootrest.resource
 
 import no.stackcanary.kotlinspringbootrest.repository.model.Currency
 import no.stackcanary.kotlinspringbootrest.service.CurrencyService
-import no.stackcanary.kotlinspringbootrest.webclient.response.CurrencyResponse
 import no.stackcanary.kotlinspringbootrest.webclient.response.EmptyResultResponse
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -22,10 +21,14 @@ class CryptocurrencyResource(private val currencyService: CurrencyService) {
     @GetMapping("/currency/{abbrevName}")
     fun getCurrencyByAbbreviatedName(@PathVariable abbrevName: String): ResponseEntity<Any> {
         log.info("Retrieving currency from database with $abbrevName")
-        val currency: Currency = currencyService.getCurrencyByAbbreviatedName(abbrevName)
-            ?: return ResponseEntity.badRequest()
+        val currencies: List<Currency> = currencyService.getCurrencyByAbbreviatedName(abbrevName)
+
+        if (currencies.isEmpty()) {
+            return ResponseEntity.badRequest()
                 .body(EmptyResultResponse("$abbrevName does not exist"))
-        return ResponseEntity.ok(currency)
+        }
+
+        return ResponseEntity.ok(currencies)
     }
 
     @GetMapping("/currency")
