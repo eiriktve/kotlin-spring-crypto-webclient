@@ -14,3 +14,4 @@ data class Currency(
     @Column("CREATED")
     val createdDate: LocalDate?
 )
+

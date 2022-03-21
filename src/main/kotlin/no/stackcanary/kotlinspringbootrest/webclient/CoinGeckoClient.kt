@@ -29,3 +29,4 @@ class CoinGeckoClient(private val client: WebClient, private val webClientProps:
         return mapper.readValue(jsonResponse, object : TypeReference<List<CurrencyResponse>>() {})
     }
 }
+

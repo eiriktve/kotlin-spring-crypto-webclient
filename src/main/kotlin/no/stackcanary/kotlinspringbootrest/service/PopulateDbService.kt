@@ -17,3 +17,4 @@ class PopulateDbService(
         currencyRepository.saveAll(transformer.fromCurrencyResponseToCurrency(currencies))
     }
 }
+
