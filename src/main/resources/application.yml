@@ -1,6 +1,6 @@
 spring:
   application:
-    name: "rest-dao-template"
+    name: "kotlin-spring-crypto-webclient"
   profiles:
     active: dev
 

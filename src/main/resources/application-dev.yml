@@ -14,4 +14,4 @@ spring:
     password: admin
   sql:
     init:
-      enabled: true
+      mode: always

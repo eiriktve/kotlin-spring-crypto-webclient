@@ -1,13 +1,31 @@
 # Cryptocurrency API
 
-API which utilizes the CoinGecko API to retrieve various information about crypto, such as listing of coins, current prices, trends etc.
+API which populates a db with data from CoinGecko, and serves crypto data such as listing of coins,
+current prices, trends etc available through different endpoints.
 
-## Technologies
-* Kotlin with Java 11 JVM
-* Spring Boot
-* Spring boot web
-* JDBC CRUD with H2
-* Webflux for remote calls
+## Technologies / features
+* Kotlin with Java 17 JVM
+* Spring Boot 3
+* Spring JDBC CRUD with H2
+* Webclient/Webflux
+* Error handling with advice
+* kotlinx serialization
 
 ## How to get started
-The database is initially empty, but can be populated through an endpoint. Call this resource before calling any of the other services. **{server}/api/db/populate**
+The database is initially empty, but can be populated through an endpoint. Call this resource before calling any of 
+the other services. **/api/db/populate**
+
+Yes, this could have been implemented to be done automatically at startup with a CommandLineRunner. 
+
+### Other endpoints
+**GET a specific currency (i.e., btc)**: /api/crypto/currency/btc \
+**GET All currencies:** /api/crypto/currency
+
+## Running the application
+``mvn spring-boot:run`` 
+
+Alternatively run in a docker container: \
+````docker build -t kotlin-spring-crypto .```` \
+````docker run -p 8080:8080 kotlin-spring-crypto````
+
+Configured to run with the **dev** profile as default, see application-dev.yml for config.
