@@ -15,7 +15,10 @@ import java.time.LocalDateTime
 @ControllerAdvice
 class ControllerAdvisor : ResponseEntityExceptionHandler() {
 
-    val log: Logger = LoggerFactory.getLogger(ControllerAdvisor::class.java)
+    companion object {
+        private val log: Logger = LoggerFactory.getLogger(ControllerAdvisor::class.java)
+    }
+
 
     /**
      * Fallback handler for top level exceptions

@@ -16,7 +16,10 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class CryptocurrencyResource(private val currencyService: CurrencyService) {
 
-    val log: Logger = LoggerFactory.getLogger(CryptocurrencyResource::class.java)
+    companion object {
+        private val log: Logger = LoggerFactory.getLogger(CryptocurrencyResource::class.java)
+    }
+
 
     @GetMapping("/currency/{abbrevName}")
     fun getCurrencyByAbbreviatedName(@PathVariable abbrevName: String): ResponseEntity<Any> {

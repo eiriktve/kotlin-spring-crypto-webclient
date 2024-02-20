@@ -23,7 +23,10 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class PopulateDbResource(private val service: PopulateDbService) {
 
-    val log: Logger = LoggerFactory.getLogger(PopulateDbResource::class.java)
+    companion object {
+        private val log: Logger = LoggerFactory.getLogger(PopulateDbResource::class.java)
+    }
+
 
     @PostMapping("/populate")
     fun populate(): ResponseEntity<GenericDto> {
