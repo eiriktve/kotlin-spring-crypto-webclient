@@ -25,13 +25,21 @@ class PopulateDbResource(private val service: PopulateDbService) {
 
     companion object {
         private val log: Logger = LoggerFactory.getLogger(PopulateDbResource::class.java)
+        var populated = false
     }
 
 
     @PostMapping("/populate")
     fun populate(): ResponseEntity<GenericDto> {
-        log.info("Populating database with data from CoinGecko")
-        service.populateDbWithDataFromCoinGecko()
-        return ResponseEntity.ok(GenericDto(HttpStatus.OK.value(), "Database has been populated"))
+        return if (populated) {
+            ResponseEntity.badRequest()
+                .body(GenericDto(HttpStatus.BAD_REQUEST.value(), "Database has already been populated"))
+        } else {
+            log.info("Populating database with data from CoinGecko")
+            service.populateDbWithDataFromCoinGecko()
+            populated = true
+            ResponseEntity.ok(GenericDto(HttpStatus.OK.value(), "Database population done"))
+        }
+
     }
 }
