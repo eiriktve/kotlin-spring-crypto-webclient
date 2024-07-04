@@ -15,8 +15,6 @@ current prices, trends etc available through different endpoints.
 The database is initially empty, but can be populated through an endpoint. Call this resource before calling any of 
 the other services. **/api/db/populate**
 
-Yes, this could have been implemented to be done automatically at startup with a CommandLineRunner. 
-
 ### Other endpoints
 **GET a specific currency (i.e., btc)**: /api/crypto/currency/btc \
 **GET All currencies:** /api/crypto/currency

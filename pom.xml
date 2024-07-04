@@ -74,7 +74,7 @@
         </dependency>
         <dependency>
             <!-- Obviously not for production, but should be plug-and-play with something like postgres,
-                just replace this dependency-->
+                just replace this dependency and use the table definition in resources/schema.sql -->
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
@@ -101,7 +101,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.10.2</version>
+            <version>5.10.1</version>
             <scope>test</scope>
         </dependency>
 
